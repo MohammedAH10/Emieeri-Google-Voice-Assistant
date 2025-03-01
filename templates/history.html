@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}History - Gemini Voice Assistant{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Conversation History</h1>
+        
+        {% if conversations %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Prompt</th>
+                            <th>Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for conversation in conversations %}
+                            <tr>
+                                <td>{{ conversation.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>{{ conversation.prompt }}</td>
+                                <td>{{ conversation.response }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No conversation history found. Start talking to your assistant!
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

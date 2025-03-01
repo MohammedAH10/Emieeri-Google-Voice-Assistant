@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Emieeri Voice Assistant{% endblock %}
+
+{% block extra_css %}
+<style>
+    .chat-container {
+        height: 60vh;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        margin-bottom: 20px;
+    }
+    .message {
+        margin-bottom: 15px;
+        padding: 10px 15px;
+        border-radius: 18px;
+        max-width: 80%;
+    }
+    .user-message {
+        background-color: #dcf8c6;
+        margin-left: auto;
+    }
+    .assistant-message {
+        background-color: #f1f0f0;
+    }
+    .voice-controls {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .mic-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .mic-button:hover {
+        background-color: #0056b3;
+    }
+    .mic-button.listening {
+        animation: pulse 1.5s infinite;
+        background-color: #dc3545;
+    }
+    .audio-visualization {
+        height: 60px;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .bar {
+        background-color: #007bff;
+        width: 4px;
+        height: 5px;
+        margin: 0 2px;
+        border-radius: 2px;
+        transition: height 0.2s ease;
+    }
+    .status-text {
+        font-size: 14px;
+        color: #6c757d;
+        text-align: center;
+        margin-top: 10px;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Welcome, {{ current_user.username }}</h1>
+        <p>Say "<span class="text-primary">{{ config['WAKE_WORD'] }}</span>" to activate the voice assistant.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="chat-container" id="chat-container">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        
+        <div class="audio-visualization" id="visualization">
+            <!-- Audio visualization bars will be added here via JS -->
+        </div>
+        
+        <div class="voice-controls">
+            <button class="mic-button" id="mic-button">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <p class="status-text" id="status-text">Ready. Say "{{ config['WAKE_WORD'] }}" to activate.</p>
+        </div>
+        
+        <div class="text-input-fallback">
+            <form id="text-form" class="d-flex">
+                <input type="text" class="form-control me-2" id="text-input" placeholder="Or type your message here...">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+<script src="{{ url_for('static', filename='js/voice.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

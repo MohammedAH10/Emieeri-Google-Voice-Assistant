@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Emieeri Voice Assistant - Home{% endblock %}
+
+{% block content %}
+<div class="row align-items-center hero-section">
+    <div class="col-md-6">
+        <h1 class="display-4 mb-4">Your AI-Powered Voice Assistant</h1>
+        <p class="lead mb-4">
+            Experience the power of Google's Gemini AI with a natural voice interface. 
+            Just say the wake word and start talking to your personal assistant.
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Get Started</a>
+                <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-lg">Login</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-6 text-center">
+        <div class="assistant-placeholder">
+            <div class="assistant-animation">
+                <div class="pulse-ring"></div>
+                <i class="fas fa-microphone-alt fa-5x"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 pt-5 feature-section">
+    <div class="col-12 text-center mb-4">
+        <h2>Key Features</h2>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-microphone-alt fa-3x mb-3 text-primary"></i>
+                <h5 class="card-title">Voice Interface</h5>
+                <p class="card-text">Interact with your assistant naturally using voice commands activated by a wake word.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-brain fa-3x mb-3 text-primary"></i>
+                <h5 class="card-title">Google Gemini AI</h5>
+                <p class="card-text">Powered by Google's advanced Gemini language model for intelligent responses.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-history fa-3x mb-3 text-primary"></i>
+                <h5 class="card-title">Conversation History</h5>
+                <p class="card-text">Access and review your past conversations with the assistant.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
