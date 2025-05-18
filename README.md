@@ -1,2 +1,2 @@
 # A VUI Voice Command Assistant
-This is my personal voice command assistant 
+Build on google Gemini gemini 1.5 flash
